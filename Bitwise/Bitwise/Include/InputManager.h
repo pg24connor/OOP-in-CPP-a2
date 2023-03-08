@@ -1,7 +1,19 @@
 #pragma once
+#include <iostream>
+#include <vector>
+//==========================================================
+//==========================================================
 
-//==========================================================
-//==========================================================
+enum Action
+{
+	ATTACK = 1,
+	JUMP = 2,
+	DUCK = 4,
+	FORWARD = 8,
+	BACK = 16,
+	USE = 32,
+	CANCEL = 64
+};
 
 class InputState
 {
@@ -14,24 +26,14 @@ public:
 	InputState();
 	~InputState();
 
-	bool IsAttack() const;
-	bool IsJump() const;
-	bool IsDuck() const;
-	bool IsForward() const;
-	bool IsBack() const;
-	bool IsUse() const;
-	bool IsCancel() const;
+	int IsAction(int index) const;
 
+	std::vector<int> GetActions() const { return keys[1]; };																																																																														
+	
 private:
 
-	bool mAttack;
-	bool mJump;
-	bool mDuck;
-	bool mForward;
-	bool mBack;
-	bool mUse;
-	bool mCancel;
-
+	int mInput;
+	std::vector<std::vector<int> > keys;
 };
 
 
@@ -54,4 +56,3 @@ private:
 	InputState mState;
 
 };
-

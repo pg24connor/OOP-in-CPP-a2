@@ -43,8 +43,8 @@ const char* Game::GetWindowName() const
 void Game::GetClearColor(exColor& color) const
 {
     color.r = 255;
-    color.g = 255;
-    color.b = 255;
+    color.g = 0;
+    color.b = 0;
 }
 
 void Game::OnEvent(SDL_Event* event)
@@ -57,37 +57,37 @@ void Game::OnEventsConsumed()
 
 void Game::Run(float deltaTime)
 {
-    if (mInputManager.GetState().IsAttack())
+    if (mInputManager.GetState().IsAction(mInputManager.GetState().GetActions()[0]))
     {
         mEngine->DrawText(mFontID, exVector2(10, 10), "Attack", exColor(0, 0, 0), 0);
     }
 
-    if (mInputManager.GetState().IsJump())
+    if (mInputManager.GetState().IsAction(mInputManager.GetState().GetActions()[1]))
     {
         mEngine->DrawText(mFontID, exVector2(10, 45), "Jump", exColor(0, 0, 0), 0);
     }
 
-    if (mInputManager.GetState().IsDuck())
+    if (mInputManager.GetState().IsAction(mInputManager.GetState().GetActions()[2]))
     {
         mEngine->DrawText(mFontID, exVector2(10, 80), "Duck", exColor(0, 0, 0), 0);
     }
 
-    if (mInputManager.GetState().IsForward())
+    if (mInputManager.GetState().IsAction(mInputManager.GetState().GetActions()[3]))
     {
         mEngine->DrawText(mFontID, exVector2(10, 115), "Forward", exColor(0, 0, 0), 0);
     }
 
-    if (mInputManager.GetState().IsBack())
+    if (mInputManager.GetState().IsAction(mInputManager.GetState().GetActions()[4]))
     {
         mEngine->DrawText(mFontID, exVector2(10, 150), "Back", exColor(0, 0, 0), 0);
     }
 
-    if (mInputManager.GetState().IsUse())
+    if (mInputManager.GetState().IsAction(mInputManager.GetState().GetActions()[5]))
     {
         mEngine->DrawText(mFontID, exVector2(10, 185), "Use", exColor(0, 0, 0), 0);
     }
 
-    if (mInputManager.GetState().IsCancel())
+    if (mInputManager.GetState().IsAction(mInputManager.GetState().GetActions()[6]))
     {
         mEngine->DrawText(mFontID, exVector2(10, 220), "Cancel", exColor(0, 0, 0), 0);
     }   

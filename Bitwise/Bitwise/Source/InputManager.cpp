@@ -5,54 +5,32 @@
 //==========================================================
 //==========================================================
 
-InputState::InputState()
-	: mAttack(false)
-	, mJump(false)
-	, mDuck(false)
-	, mForward(false)
-	, mBack(false)
-	, mUse(false)
-	, mCancel(false)
+InputState::InputState() : mInput(0)
 {
+	keys[0].push_back(SDL_SCANCODE_LCTRL);
+	keys[0].push_back(SDL_SCANCODE_SPACE);
+	keys[0].push_back(SDL_SCANCODE_LSHIFT);
+	keys[0].push_back(SDL_SCANCODE_UP);
+	keys[0].push_back(SDL_SCANCODE_DOWN);
+	keys[0].push_back(SDL_SCANCODE_E);
+	keys[0].push_back(SDL_SCANCODE_BACKSPACE);
+
+	keys[1].push_back(1);
+	keys[1].push_back(2);
+	keys[1].push_back(4);
+	keys[1].push_back(8);
+	keys[1].push_back(16);
+	keys[1].push_back(32);
+	keys[1].push_back(64);
 }
 
 InputState::~InputState()
 {
 }
 
-bool InputState::IsAttack() const
+int InputState::IsAction(int index) const
 {
-	return mAttack;
-}
-
-bool InputState::IsJump() const
-{
-	return mJump;
-}
-
-bool InputState::IsDuck() const
-{
-	return mDuck;
-}
-
-bool InputState::IsForward() const
-{
-	return mForward;
-}
-
-bool InputState::IsBack() const
-{
-	return mBack;
-}
-
-bool InputState::IsUse() const
-{
-	return mUse;
-}
-
-bool InputState::IsCancel() const
-{
-	return mCancel;
+	return (mInput & index) != 0;
 }
 
 //==========================================================
@@ -60,13 +38,10 @@ bool InputState::IsCancel() const
 
 void InputManager::Update()
 {
-	mState.mAttack = IsButtonDown(SDL_SCANCODE_LCTRL);
-	mState.mJump = IsButtonDown(SDL_SCANCODE_SPACE);
-	mState.mDuck = IsButtonDown(SDL_SCANCODE_LSHIFT);
-	mState.mForward = IsButtonDown(SDL_SCANCODE_UP);
-	mState.mBack = IsButtonDown(SDL_SCANCODE_DOWN);
-	mState.mUse = IsButtonDown(SDL_SCANCODE_E);
-	mState.mCancel = IsButtonDown(SDL_SCANCODE_BACKSPACE);
+	for (int i = 0; i < mState.keys.size() - 1; ++i)
+	{
+		mState.mInput = (mState.mInput & ~(1 << i)) | (IsButtonDown(mState.keys[0][i]) << i);
+	}
 }
 
 bool InputManager::IsButtonDown(int nScancode) const
