@@ -1,2 +1,5 @@
 ﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(517,5): warning MSB8028: The intermediate directory (Obj\Debug\) contains files shared from another project (Pong.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+  Game.cpp
+C:\Users\pg24connor\Repos\OOP-in-CPP-a2\Bitwise\Bitwise\Source\Game.cpp(61,23): warning C4018: '<': signed/unsigned mismatch
+C:\Users\pg24connor\Repos\OOP-in-CPP-a2\Bitwise\Bitwise\Source\Game.cpp(65,56): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
   Game.vcxproj -> C:\Users\pg24connor\Repos\OOP-in-CPP-a2\Bitwise\Bitwise\bin\Game.exe

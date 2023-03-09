@@ -1,19 +1,10 @@
 #pragma once
-#include <iostream>
 #include <vector>
-//==========================================================
-//==========================================================
+#include <variant>
+#include <string>
 
-enum Action
-{
-	ATTACK = 1,
-	JUMP = 2,
-	DUCK = 4,
-	FORWARD = 8,
-	BACK = 16,
-	USE = 32,
-	CANCEL = 64
-};
+//==========================================================
+//==========================================================
 
 class InputState
 {
@@ -28,12 +19,14 @@ public:
 
 	int IsAction(int index) const;
 
-	std::vector<int> GetActions() const { return keys[1]; };																																																																														
+	//returns a vector of ints 
+	std::vector<std::variant<int, std::string>> GetActions() const { return keys[0]; };
+	std::vector<std::variant<int, std::string>> GetActionWords() const { return keys[2]; };
 	
 private:
 
 	int mInput;
-	std::vector<std::vector<int> > keys;
+	std::vector<std::vector<std::variant<int, std::string>>> keys;
 };
 
 

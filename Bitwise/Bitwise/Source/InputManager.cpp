@@ -1,5 +1,5 @@
 #include "InputManager.h"
-
+#include <iostream>
 #include "SDL.h"
 
 //==========================================================
@@ -7,29 +7,23 @@
 
 InputState::InputState() : mInput(0)
 {
-	keys[0].push_back(SDL_SCANCODE_LCTRL);
-	keys[0].push_back(SDL_SCANCODE_SPACE);
-	keys[0].push_back(SDL_SCANCODE_LSHIFT);
-	keys[0].push_back(SDL_SCANCODE_UP);
-	keys[0].push_back(SDL_SCANCODE_DOWN);
-	keys[0].push_back(SDL_SCANCODE_E);
-	keys[0].push_back(SDL_SCANCODE_BACKSPACE);
-
-	keys[1].push_back(1);
-	keys[1].push_back(2);
-	keys[1].push_back(4);
-	keys[1].push_back(8);
-	keys[1].push_back(16);
-	keys[1].push_back(32);
-	keys[1].push_back(64);
+	//assigns all the bits and all the keys in one vector thingy (idk i missed that class)
+	keys =
+	{
+		{1, 2, 4, 8, 16, 32, 64},
+		{SDL_SCANCODE_LCTRL, SDL_SCANCODE_SPACE, SDL_SCANCODE_LSHIFT, SDL_SCANCODE_UP, SDL_SCANCODE_DOWN, SDL_SCANCODE_E, SDL_SCANCODE_BACKSPACE },
+		{"Attack", "Jump", "Duck", "Forawrd", "Back", "Use", "Cancel"}
+	};
 }
 
 InputState::~InputState()
 {
 }
 
+//returns the state of the bit
 int InputState::IsAction(int index) const
 {
+	//		and always takes the zero so using and will only return the one your looking for
 	return (mInput & index) != 0;
 }
 
@@ -38,9 +32,16 @@ int InputState::IsAction(int index) const
 
 void InputManager::Update()
 {
-	for (int i = 0; i < mState.keys.size() - 1; ++i)
+	//checks all inputs and assigns them to their bit inside of mInput
+	for (int i = 0; i < mState.keys[1].size(); ++i)
 	{
-		mState.mInput = (mState.mInput & ~(1 << i)) | (IsButtonDown(mState.keys[0][i]) << i);
+		//				this part is to turn off		this part checks to see if the button is down
+		//				any bits that need to be		IsButtonDown() returns a bool (1 is true 0 is false)
+		//				turned off by checking the		the or operator always takes the ones from a statment
+		//				the and of the inverse of 		so if IsButtonDown is true than using bit shifting the 
+		//				one shifted across all the 		correct bit turns to 1	
+		//				bits i wanna check
+		mState.mInput = (mState.mInput & ~(1 << i)) | (IsButtonDown(std::get<int>(mState.keys[1][i])) << i);
 	}
 }
 

@@ -7,6 +7,7 @@
 #include "InputManager.h"
 
 #include <iostream>
+#include <string>
 
 Game* Game::sInstance = nullptr;
 
@@ -57,38 +58,12 @@ void Game::OnEventsConsumed()
 
 void Game::Run(float deltaTime)
 {
-    if (mInputManager.GetState().IsAction(mInputManager.GetState().GetActions()[0]))
+    //replace if chain with a for loop
+    for (int i = 0; i < mInputManager.GetState().GetActions().size(); ++i)
     {
-        mEngine->DrawText(mFontID, exVector2(10, 10), "Attack", exColor(0, 0, 0), 0);
+        if (mInputManager.GetState().IsAction(std::get<int>(mInputManager.GetState().GetActions()[i])))
+        {
+            mEngine->DrawText(mFontID, exVector2(10, i * 35), std::get<std::string>(mInputManager.GetState().GetActionWords()[i]).c_str(), exColor(0, 0, 0), 0);
+        }
     }
-
-    if (mInputManager.GetState().IsAction(mInputManager.GetState().GetActions()[1]))
-    {
-        mEngine->DrawText(mFontID, exVector2(10, 45), "Jump", exColor(0, 0, 0), 0);
-    }
-
-    if (mInputManager.GetState().IsAction(mInputManager.GetState().GetActions()[2]))
-    {
-        mEngine->DrawText(mFontID, exVector2(10, 80), "Duck", exColor(0, 0, 0), 0);
-    }
-
-    if (mInputManager.GetState().IsAction(mInputManager.GetState().GetActions()[3]))
-    {
-        mEngine->DrawText(mFontID, exVector2(10, 115), "Forward", exColor(0, 0, 0), 0);
-    }
-
-    if (mInputManager.GetState().IsAction(mInputManager.GetState().GetActions()[4]))
-    {
-        mEngine->DrawText(mFontID, exVector2(10, 150), "Back", exColor(0, 0, 0), 0);
-    }
-
-    if (mInputManager.GetState().IsAction(mInputManager.GetState().GetActions()[5]))
-    {
-        mEngine->DrawText(mFontID, exVector2(10, 185), "Use", exColor(0, 0, 0), 0);
-    }
-
-    if (mInputManager.GetState().IsAction(mInputManager.GetState().GetActions()[6]))
-    {
-        mEngine->DrawText(mFontID, exVector2(10, 220), "Cancel", exColor(0, 0, 0), 0);
-    }   
 }

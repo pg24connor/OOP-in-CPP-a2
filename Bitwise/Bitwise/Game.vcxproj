@@ -94,6 +94,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>Include\;EngineX\Include;EngineX\Dependencies\SDL\SDL2-2.0.3\include;EngineX\Dependencies\SDL\SDL2_ttf-2.0.12;EngineX\Dependencies\SDL\SDL2_gfx-1.0.1;EngineX\Dependencies\SDL</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>
