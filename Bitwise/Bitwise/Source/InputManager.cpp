@@ -7,7 +7,7 @@
 
 InputState::InputState() : mInput(0)
 {
-	//assigns all the bits and all the keys in one vector thingy (idk i missed that class)
+	//assigns all the bits and all the keys and all the text in one vector thingy (idk i missed that class)
 	keys =
 	{
 		{1, 2, 4, 8, 16, 32, 64},
